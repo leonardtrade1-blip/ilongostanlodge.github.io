@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ILONGOSTAN LODGE — Premium luxury accommodation in Tanzania. Three prestigious locations: Dodoma, Mbeya, and Dar es Salaam. Experience world-class hospitality.">
+  <meta name="keywords" content="Ilongostan Lodge, Tanzania hotel, Dodoma lodge, Mbeya lodge, Dar es Salaam lodge, luxury accommodation Tanzania">
+  <meta name="author" content="ILONGOSTAN LODGE">
+  <meta name="theme-color" content="#07070d">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="ILONGOSTAN LODGE — Luxury Redefined">
+  <meta property="og:description" content="Premium luxury accommodation across Tanzania. Three prestigious branches in Dodoma, Mbeya, and Dar es Salaam.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="photo/IMG-20260330-WA0016.jpg">
+  
+  <title>ILONGOSTAN LODGE — Luxury Redefined | Tanzania</title>
+  
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏨</text></svg>">
+  
+  <style>
+    /* Home-specific: Stats Bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    
+    .stat-item {
+      padding: 40px 30px;
+      text-align: center;
+      border-right: 1px solid var(--glass-border);
+      transition: var(--transition-base);
+    }
+    
+    .stat-item:last-child {
+      border-right: none;
+    }
+    
+    .stat-item:hover {
+      background: var(--glass-bg);
+    }
+    
+    .stat-number {
+      font-family: var(--font-brand);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    
+    .stat-label {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white-muted);
+    }
+    
+    /* Testimonial quote style */
+    .welcome-quote {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 20px;
+    }
+    
+    .welcome-quote blockquote {
+      font-family: var(--font-heading);
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--white);
+      position: relative;
+      padding: 40px 0;
+    }
+    
+    .welcome-quote blockquote::before {
+      content: '\201C';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-heading);
+      font-size: 6rem;
+      color: var(--gold);
+      opacity: 0.3;
+      line-height: 1;
+    }
+    
+    .welcome-quote .author {
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 12px;
+    }
+    
+    /* Divider */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 20px 0;
+    }
+    
+    .section-divider .line {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dark), transparent);
+    }
+    
+    .section-divider .diamond {
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      transform: rotate(45deg);
+    }
+    
+    /* Why Choose Us */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    
+    .why-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: 40px 32px;
+      text-align: center;
+      transition: var(--transition-base);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .why-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-gold);
+      transform: scaleX(0);
+      transition: transform 0.5s var(--ease-out-expo);
+    }
+    
+    .why-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .why-card:hover {
+      border-color: var(--glass-border-hover);
+      background: var(--glass-bg-hover);
+      transform: translateY(-6px);
+    }
+    
+    .why-card .emoji {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+    
+    .why-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    
+    .why-card p {
+      font-size: 0.9rem;
+      color: var(--white-muted);
+      line-height: 1.7;
+    }
+    
+    @media (max-width: 768px) {
+      .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .stat-item:nth-child(2) {
+        border-right: none;
+      }
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Preloader */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: var(--bg-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      transition: opacity 0.6s ease;
+    }
+    
+    .preloader-logo {
+      font-family: var(--font-brand);
+      font-size: 2rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: pulse-preloader 1.5s infinite;
+    }
+    
+    .preloader-bar {
+      width: 200px;
+      height: 2px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    
+    .preloader-bar::after {
+      content: '';
+      display: block;
+      width: 40%;
+      height: 100%;
+      background: var(--gold);
+      border-radius: 2px;
+      animation: preloader-slide 1.2s infinite ease-in-out;
+    }
+    
+    @keyframes preloader-slide {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(350%); }
+    }
+    
+    @keyframes pulse-preloader {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="preloader-logo">Ilongostan</div>
+    <div class="preloader-bar"></div>
+  </div>
+  
+  <!-- Mobile Nav Overlay -->
+  <div class="nav-overlay"></div>
+  
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="nav-logo-icon">IL</div>
+        <span class="nav-logo">Ilongostan Lodge</span>
+      </a>
+      
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="#branches" class="nav-link">Our Branches</a>
+        <a href="dodoma.html" class="nav-link">Dodoma</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-cta">Contact Us</a>
+      </div>
+      
+      <div class="nav-toggle" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <img src="photo/IMG-20260330-WA0016.jpg" alt="ILONGOSTAN LODGE Exterior" data-parallax="0.3" loading="eager">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-particles"></div>
+    
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Tanzania's Premium Lodge
+      </div>
+      
+      <h1 class="hero-title">
+        <span class="gold-text">Ilongostan</span><br>
+        Lodge
+      </h1>
+      
+      <p class="hero-subtitle">
+        Where Luxury Meets Authenticity — Three Destinations, One Unforgettable Experience
+      </p>
+      
+      <div class="hero-actions">
+        <a href="#branches" class="btn btn-primary">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Explore Branches
+        </a>
+        <a href="#contact" class="btn btn-outline">
+          Get in Touch
+        </a>
+      </div>
+    </div>
+    
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+  
+  <!-- Stats Bar -->
+  <div class="stats-bar reveal">
+    <div class="stat-item">
+      <div class="stat-number" data-count="3" data-suffix="">0</div>
+      <div class="stat-label">Locations</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-count="50" data-suffix="+">0</div>
+      <div class="stat-label">Premium Rooms</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-count="1000" data-suffix="+">0</div>
+      <div class="stat-label">Happy Guests</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-count="24" data-suffix="/7">0</div>
+      <div class="stat-label">Service</div>
+    </div>
+  </div>
+  
+  <!-- About Section -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image reveal-left">
+          <img src="photo/IMG-20260330-WA0017.jpg" alt="ILONGOSTAN LODGE Courtyard" loading="lazy">
+          <div class="experience-badge">
+            <div class="number" data-count="5" data-suffix="+">0</div>
+            <div class="label">Years of Excellence</div>
+          </div>
+        </div>
+        
+        <div class="about-content reveal-right">
+          <div class="section-tag">About Us</div>
+          <h2 class="section-title">
+            A Legacy of <span class="highlight">Luxury</span> Hospitality
+          </h2>
+          <p class="about-text">
+            ILONGOSTAN LODGE is Tanzania's premier hospitality destination, offering an extraordinary blend of modern luxury and authentic African warmth. With three strategically located branches across the nation — in Dodoma, Mbeya, and Dar es Salaam — we provide travelers and business guests with world-class comfort, impeccable service, and an experience that transcends the ordinary.
+          </p>
+          <p class="about-text">
+            Every detail at ILONGOSTAN LODGE has been thoughtfully crafted — from our architecturally stunning buildings adorned with ambient lighting, to our meticulously furnished rooms featuring premium bedding, modern climate control, and elegant stone-finished bathrooms.
+          </p>
+          
+          <div class="about-features">
+            <div class="about-feature">
+              <span class="icon">✨</span>
+              <span class="text">Luxury Rooms</span>
+            </div>
+            <div class="about-feature">
+              <span class="icon">🌡️</span>
+              <span class="text">Climate Control</span>
+            </div>
+            <div class="about-feature">
+              <span class="icon">🛁</span>
+              <span class="text">Modern Bathrooms</span>
+            </div>
+            <div class="about-feature">
+              <span class="icon">📍</span>
+              <span class="text">Prime Locations</span>
+            </div>
+            <div class="about-feature">
+              <span class="icon">🔒</span>
+              <span class="text">24/7 Security</span>
+            </div>
+            <div class="about-feature">
+              <span class="icon">🍽️</span>
+              <span class="text">Fine Dining</span>
+            </div>
+          </div>
+          
+          <a href="dodoma.html" class="btn btn-primary">
+            Explore Dodoma Branch
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Ambient glow -->
+    <div class="ambient-glow gold" style="top: 20%; right: -100px;"></div>
+  </section>
+  
+  <!-- Welcome Quote -->
+  <section class="section" style="padding: 60px 0;">
+    <div class="container">
+      <div class="section-divider reveal">
+        <div class="line"></div>
+        <div class="diamond"></div>
+        <div class="line"></div>
+      </div>
+      <div class="welcome-quote reveal">
+        <blockquote>
+          Experience the pinnacle of Tanzanian hospitality where every moment is curated, every space is an artwork, and every guest becomes family.
+        </blockquote>
+        <div class="author">— The ILONGOSTAN Experience</div>
+      </div>
+      <div class="section-divider reveal">
+        <div class="line"></div>
+        <div class="diamond"></div>
+        <div class="line"></div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Branches Section -->
+  <section class="section" id="branches" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Our Destinations</div>
+        <h2 class="section-title">Three <span class="highlight">Exceptional</span> Locations</h2>
+        <p class="section-desc">
+          From the capital city to the southern highlands and the coastal metropolis, ILONGOSTAN LODGE awaits you across Tanzania.
+        </p>
+      </div>
+      
+      <div class="branches-grid">
+        <!-- Dodoma -->
+        <a href="dodoma.html" class="branch-card reveal delay-1">
+          <div class="branch-card-badge">Now Open</div>
+          <div class="branch-card-bg">
+            <img src="photo/IMG-20260330-WA0016.jpg" alt="ILONGOSTAN LODGE Dodoma" loading="lazy">
+          </div>
+          <div class="branch-card-overlay"></div>
+          <div class="branch-card-content">
+            <div class="branch-card-location">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              Tanzania's Capital
+            </div>
+            <h3 class="branch-card-name">Dodoma</h3>
+            <p class="branch-card-desc">Our newest and most architecturally stunning branch in the heart of Tanzania's capital city. Modern luxury with panoramic views.</p>
+            <span class="branch-card-link">
+              Explore Dodoma <span class="arrow">→</span>
+            </span>
+          </div>
+        </a>
+        
+        <!-- Mbeya -->
+        <div class="branch-card reveal delay-2">
+          <div class="branch-card-badge">Flagship</div>
+          <div class="branch-card-bg">
+            <img src="photo/IMG-20260330-WA0018.jpg" alt="ILONGOSTAN LODGE Mbeya" loading="lazy">
+          </div>
+          <div class="branch-card-overlay"></div>
+          <div class="branch-card-content">
+            <div class="branch-card-location">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              Southern Highlands
+            </div>
+            <h3 class="branch-card-name">Mbeya</h3>
+            <p class="branch-card-desc">Our flagship location in the Maendeleo area, near the Main Bus Terminal. The birthplace of the ILONGOSTAN legacy.</p>
+            <span class="branch-card-link">
+              Coming Soon <span class="arrow">→</span>
+            </span>
+          </div>
+        </div>
+        
+        <!-- Dar es Salaam -->
+        <div class="branch-card reveal delay-3">
+          <div class="branch-card-bg">
+            <img src="photo/IMG-20260330-WA0015.jpg" alt="ILONGOSTAN LODGE Dar es Salaam" loading="lazy">
+          </div>
+          <div class="branch-card-overlay"></div>
+          <div class="branch-card-content">
+            <div class="branch-card-location">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              Coastal Metropolis
+            </div>
+            <h3 class="branch-card-name">Dar es Salaam</h3>
+            <p class="branch-card-desc">Our coastal jewel in Tanzania's largest city. Business meets paradise in the vibrant heart of East Africa's commercial hub.</p>
+            <span class="branch-card-link">
+              Coming Soon <span class="arrow">→</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Why Choose Us -->
+  <section class="section" id="why-us">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Why Choose Us</div>
+        <h2 class="section-title">The <span class="highlight">ILONGOSTAN</span> Difference</h2>
+        <p class="section-desc">
+          We don't just offer accommodation — we offer an experience that sets us apart from every other lodge in Tanzania.
+        </p>
+      </div>
+      
+      <div class="why-grid">
+        <div class="why-card reveal delay-1">
+          <span class="emoji">🏗️</span>
+          <h3>Architectural Marvel</h3>
+          <p>Our buildings are designed with cutting-edge modern architecture, featuring stunning night illumination and premium finishes that make a bold statement.</p>
+        </div>
+        <div class="why-card reveal delay-2">
+          <span class="emoji">🛏️</span>
+          <h3>Premium Comfort</h3>
+          <p>Every room features handcrafted dark wood furniture, premium bedding, split climate control, designer curtains, and elegant ambient lighting.</p>
+        </div>
+        <div class="why-card reveal delay-3">
+          <span class="emoji">🚿</span>
+          <h3>Luxury Bathrooms</h3>
+          <p>Stone-finished walls, rain showers, backlit mirrors, and designer fixtures — our bathrooms are a spa-like sanctuary within your room.</p>
+        </div>
+        <div class="why-card reveal delay-1">
+          <span class="emoji">📍</span>
+          <h3>Strategic Locations</h3>
+          <p>Each branch is positioned in prime areas — near transportation hubs, city centers, and key landmarks for maximum convenience.</p>
+        </div>
+        <div class="why-card reveal delay-2">
+          <span class="emoji">👨‍💼</span>
+          <h3>Exceptional Service</h3>
+          <p>Our dedicated team provides 24/7 personalized service. From reception to room service, every interaction is crafted with warmth and professionalism.</p>
+        </div>
+        <div class="why-card reveal delay-3">
+          <span class="emoji">💎</span>
+          <h3>Affordable Luxury</h3>
+          <p>We believe luxury should be accessible. ILONGOSTAN LODGE delivers five-star experiences at rates that welcome every discerning traveler.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="ambient-glow gold" style="bottom: 10%; left: -150px;"></div>
+  </section>
+  
+  <!-- Contact Section -->
+  <section class="section" id="contact" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Get in Touch</div>
+        <h2 class="section-title">Contact <span class="highlight">Us</span></h2>
+        <p class="section-desc">
+          Ready to experience the ILONGOSTAN difference? Reach out — we'd love to welcome you.
+        </p>
+      </div>
+      
+      <div class="contact-content">
+        <div class="contact-info reveal-left">
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-label">Phone</div>
+              <div class="contact-value">
+                <a href="tel:+255767306626">+255 767 306 626</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value">
+                <a href="mailto:ilongo1@yahoo.com">ilongo1@yahoo.com</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <div class="contact-label">Reception Hours</div>
+              <div class="contact-value">24 Hours — 7 Days a Week</div>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">🌐</div>
+            <div>
+              <div class="contact-label">Branches</div>
+              <div class="contact-value">Dodoma · Mbeya · Dar es Salaam</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contact-map reveal-right">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15960.5!2d33.43633!3d-8.89399!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwNTMnMzguNCJTIDMzwrAyNicxMC44IkU!5e0!3m2!1sen!2stz!4v1"
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="ILONGOSTAN LODGE Location">
+          </iframe>
+        </div>
+      </div>
+      
+      <!-- All Branches Contact Cards -->
+      <div class="branches-contact">
+        <div class="branch-contact-card reveal delay-1">
+          <div class="city">📍 Dodoma</div>
+          <div class="address">Tanzania's Capital City<br>Dodoma, Tanzania</div>
+          <div class="phone">
+            <a href="tel:+255767306626" style="color: var(--gold);">+255 767 306 626</a>
+          </div>
+        </div>
+        <div class="branch-contact-card reveal delay-2">
+          <div class="city">📍 Mbeya</div>
+          <div class="address">Maendeleo Area<br>Near Main Bus Terminal<br>Mbeya, Tanzania</div>
+          <div class="phone">
+            <a href="tel:+255767306626" style="color: var(--gold);">+255 767 306 626</a>
+          </div>
+        </div>
+        <div class="branch-contact-card reveal delay-3">
+          <div class="city">📍 Dar es Salaam</div>
+          <div class="address">Dar es Salaam<br>Tanzania</div>
+          <div class="phone">
+            <a href="tel:+255767306626" style="color: var(--gold);">+255 767 306 626</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="nav-logo">Ilongostan Lodge</span>
+          <p>
+            Tanzania's premier luxury lodge experience. Three destinations, one unforgettable standard of excellence. Your home away from home.
+          </p>
+        </div>
+        
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#branches">Our Branches</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="footer-title">Branches</h4>
+          <ul class="footer-links">
+            <li><a href="dodoma.html">Dodoma</a></li>
+            <li><a href="#">Mbeya</a></li>
+            <li><a href="#">Dar es Salaam</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="footer-title">Contact</h4>
+          <ul class="footer-links">
+            <li><a href="tel:+255767306626">+255 767 306 626</a></li>
+            <li><a href="mailto:ilongo1@yahoo.com">ilongo1@yahoo.com</a></li>
+            <li>24/7 Reception</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          &copy; 2026 ILONGOSTAN LODGE. All rights reserved.
+        </div>
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="Facebook">f</a>
+          <a href="#" class="footer-social" aria-label="Instagram">ig</a>
+          <a href="#" class="footer-social" aria-label="WhatsApp">wa</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="script.js"></script>
+</body>
+</html>

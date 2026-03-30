@@ -1,0 +1,536 @@
+/* ========================================
+   DODOMA BRANCH — Specific Styles
+   ======================================== */
+
+/* Hero with video background */
+.dodoma-hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dodoma-hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.dodoma-hero-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dodoma-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(7,7,13,0.3) 0%,
+    rgba(7,7,13,0.2) 30%,
+    rgba(7,7,13,0.6) 60%,
+    rgba(7,7,13,0.95) 85%,
+    #07070d 100%
+  );
+}
+
+.dodoma-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 var(--container-padding) 80px;
+  max-width: 900px;
+}
+
+.dodoma-hero .hero-badge {
+  animation: fadeInDown 1s var(--ease-out-expo) 0.3s both;
+}
+
+.dodoma-hero .hero-title {
+  animation: fadeInUp 1s var(--ease-out-expo) 0.5s both;
+}
+
+.dodoma-hero .hero-subtitle {
+  animation: fadeInUp 1s var(--ease-out-expo) 0.7s both;
+}
+
+.dodoma-hero .location-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: rgba(212, 168, 83, 0.15);
+  border: 1px solid rgba(212, 168, 83, 0.3);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gold-light);
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  animation: fadeInUp 1s var(--ease-out-expo) 0.9s both;
+}
+
+/* ========================================
+   VIDEO SHOWCASE
+   ======================================== */
+.video-showcase {
+  background: var(--bg-secondary);
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+.video-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  background: var(--bg-card);
+  transition: var(--transition-base);
+}
+
+.video-card:hover {
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--shadow-gold);
+}
+
+.video-card video {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+  background: #000;
+}
+
+.video-card-info {
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.video-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.video-card-badge {
+  padding: 6px 16px;
+  background: rgba(212, 168, 83, 0.12);
+  border: 1px solid rgba(212, 168, 83, 0.25);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* Featured video (larger) */
+.video-featured {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 30px;
+}
+
+.video-featured .video-card:first-child {
+  grid-row: span 2;
+}
+
+.video-featured .video-card:first-child video {
+  aspect-ratio: auto;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .video-featured {
+    grid-template-columns: 1fr;
+  }
+  .video-featured .video-card:first-child {
+    grid-row: span 1;
+  }
+  .video-featured .video-card:first-child video {
+    aspect-ratio: 16/9;
+    height: auto;
+  }
+}
+
+/* ========================================
+   PHOTO GALLERY
+   ======================================== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 280px;
+  gap: 16px;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid var(--glass-border);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-out-expo);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.08);
+}
+
+.gallery-item-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(7,7,13,0.85) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+.gallery-item:hover .gallery-item-overlay {
+  opacity: 1;
+}
+
+.gallery-item-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Feature larger items */
+.gallery-item.span-2 {
+  grid-column: span 2;
+}
+
+.gallery-item.span-row-2 {
+  grid-row: span 2;
+}
+
+@media (max-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 200px;
+  }
+  .gallery-item.span-2 {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 250px;
+  }
+}
+
+/* ========================================
+   ROOMS & AMENITIES
+   ======================================== */
+.rooms-showcase {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.room-image {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.room-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-out-expo);
+}
+
+.room-image:hover img {
+  transform: scale(1.05);
+}
+
+.room-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  pointer-events: none;
+}
+
+.room-details h3 {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.room-details p {
+  font-size: 1rem;
+  color: var(--white-muted);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+.amenities-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.amenity-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+}
+
+.amenity-item .check {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(212, 168, 83, 0.15);
+  border-radius: 50%;
+  font-size: 0.65rem;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .rooms-showcase {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .amenities-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   LOCATION MAP SECTION
+   ======================================== */
+.dodoma-location {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.location-details .section-tag {
+  justify-content: flex-start;
+}
+
+.location-details .section-title {
+  text-align: left;
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+}
+
+.location-details p {
+  font-size: 1rem;
+  color: var(--white-muted);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.location-info-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.location-info-card {
+  display: flex;
+  gap: 16px;
+  padding: 18px 20px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  transition: var(--transition-base);
+}
+
+.location-info-card:hover {
+  border-color: var(--glass-border-hover);
+  background: var(--glass-bg-hover);
+}
+
+.location-info-card .icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.location-info-card .label {
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2px;
+}
+
+.location-info-card .value {
+  font-size: 0.95rem;
+  color: var(--white);
+  line-height: 1.5;
+}
+
+.location-info-card .value a {
+  color: var(--white);
+}
+
+.location-info-card .value a:hover {
+  color: var(--gold-light);
+}
+
+.location-map-frame {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  aspect-ratio: 1/1;
+}
+
+.location-map-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  filter: grayscale(0.4) brightness(0.85) contrast(1.1);
+  transition: filter 0.5s ease;
+}
+
+.location-map-frame:hover iframe {
+  filter: grayscale(0) brightness(1) contrast(1);
+}
+
+@media (max-width: 768px) {
+  .dodoma-location {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .location-map-frame {
+    aspect-ratio: 4/3;
+  }
+}
+
+/* ========================================
+   BACK TO TOP BUTTON
+   ======================================== */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 48px;
+  height: 48px;
+  background: var(--gold);
+  color: var(--bg-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  z-index: 900;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: var(--transition-base);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 20px rgba(212, 168, 83, 0.3);
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--gold-light);
+  transform: translateY(-3px);
+}
+
+/* ========================================
+   CTA BANNER
+   ======================================== */
+.cta-banner {
+  position: relative;
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+.cta-banner-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cta-banner-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+.cta-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(7,7,13,0.9), rgba(20,20,34,0.85));
+  z-index: 1;
+}
+
+.cta-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.cta-content h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.cta-content p {
+  font-size: 1.1rem;
+  color: var(--white-muted);
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+
+.cta-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
