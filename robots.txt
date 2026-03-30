@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://leonardtrade1-blip.github.io/ilongostanlodge.github.io/sitemap.xml
