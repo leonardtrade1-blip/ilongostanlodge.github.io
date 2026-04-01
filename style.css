@@ -707,7 +707,6 @@ button {
   overflow: hidden;
   aspect-ratio: 3/4;
   cursor: pointer;
-  group: true;
 }
 
 .branch-card-bg {
@@ -832,7 +831,7 @@ button {
    ======================================== */
 .contact-content {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1.2fr 1fr;
   gap: 60px;
   align-items: start;
 }
@@ -866,9 +865,15 @@ button {
   transition: var(--transition-base);
 }
 
-.contact-item:hover .contact-icon {
+.contact-item:hover .contact-icon,
+.contact-item.active .contact-icon {
   border-color: var(--gold);
   background: rgba(212, 168, 83, 0.1);
+}
+
+.contact-item.active {
+  background: rgba(212, 168, 83, 0.05);
+  border-color: var(--gold-dark);
 }
 
 .contact-label {
@@ -1348,6 +1353,11 @@ button {
     width: 100%;
     justify-content: center;
   }
+
+  /* Orientation Specific Adjustments */
+  body.landscape .hero {
+    min-height: 120vh;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1390,4 +1400,94 @@ button {
 .nav-overlay.active {
   opacity: 1;
   pointer-events: all;
+}
+
+/* ========================================
+   LIGHTBOX — Futuristic Interaction
+   ======================================== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 7, 13, 0.95);
+  backdrop-filter: blur(15px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s var(--ease-out-expo);
+  padding: 40px;
+}
+
+.lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox-content {
+  max-width: 90%;
+  max-height: 90%;
+  position: relative;
+  transform: scale(0.9);
+  transition: transform 0.5s var(--ease-out-expo);
+}
+
+.lightbox.active .lightbox-content {
+  transform: scale(1);
+}
+
+.lightbox-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  z-index: 10001;
+}
+
+.lightbox-close:hover {
+  transform: rotate(90deg) scale(1.1);
+  color: var(--gold);
+}
+
+@media (max-width: 768px) {
+  .lightbox { padding: 20px; }
+  .lightbox-close { top: 20px; right: 20px; }
+}
+
+/* ========================================
+   EXTRA FUTURISTIC EFFECTS
+   ======================================== */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.gold-text-glow {
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+/* Image Fade-In: Use animation that plays once when image paints */
+img[loading="lazy"] {
+  animation: imgFadeIn 0.8s var(--ease-out-expo) both;
+}
+
+@keyframes imgFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
