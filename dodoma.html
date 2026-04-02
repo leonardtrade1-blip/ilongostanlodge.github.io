@@ -181,10 +181,12 @@
         <!-- Main Featured Tour (General) -->
         <div class="tour-featured reveal">
           <div class="video-container glass-card">
-            <video preload="metadata" controls poster="TOUR/photo/IMG-20260330-WA0016.jpg" class="tour-video">
-              <source src="TOUR/video/general/VID-20260330-WA0024.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
+            <div class="yt-responsive-wrap" id="yt-general">
+              <div class="video-overlay" onclick="playYoutube('yt-general', 'blzjlsjTw6Q')" style="background-image: url('TOUR/photo/IMG-20260330-WA0016.jpg');">
+                <div class="play-icon-custom">▶</div>
+              </div>
+              <div class="yt-player-container"></div>
+            </div>
             <div class="video-label">General Tour Experience</div>
           </div>
         </div>
@@ -193,9 +195,12 @@
         <div class="tour-stats-grid">
           <div class="tour-highlight reveal delay-1">
             <div class="video-item glass-card">
-              <video preload="metadata" controls class="tour-video">
-                <source src="TOUR/video/reception/VID-20260330-WA0022.mp4" type="video/mp4">
-              </video>
+              <div class="yt-responsive-wrap" id="yt-reception">
+                <div class="video-overlay" onclick="playYoutube('yt-reception', '_TaRgT4yQoU')" style="background-image: url('TOUR/photo/IMG-20260330-WA0013.jpg');">
+                  <div class="play-icon-custom">▶</div>
+                </div>
+                <div class="yt-player-container"></div>
+              </div>
               <div class="video-info">
                 <h3>The Grand Reception</h3>
                 <p>A welcome in a majestic atmosphere.</p>
@@ -204,9 +209,12 @@
           </div>
           <div class="tour-highlight reveal delay-2">
             <div class="video-item glass-card">
-              <video preload="metadata" controls class="tour-video">
-                <source src="TOUR/video/hall way/20260401_100956.mp4" type="video/mp4">
-              </video>
+              <div class="yt-responsive-wrap" id="yt-hallway">
+                <div class="video-overlay" onclick="playYoutube('yt-hallway', 'JHUKVRfeGuU')" style="background-image: url('TOUR/photo/IMG-20260330-WA0018.jpg');">
+                  <div class="play-icon-custom">▶</div>
+                </div>
+                <div class="yt-player-container"></div>
+              </div>
               <div class="video-info">
                 <h3>Elegant Hallways</h3>
                 <p>Polished stone paths leading to your sanctuary.</p>
@@ -286,11 +294,14 @@
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                   Video Experience
                 </div>
-                <div class="video-wrapper">
-                  <video id="explorerVideo" controls muted playsinline preload="metadata">
-                    <source src="" type="video/mp4">
-                  </video>
+                <div class="video-wrapper yt-mode" id="explorerVideoContainer">
+                  <div class="yt-responsive-wrap">
+                    <div style="background: #000; display: flex; align-items: center; justify-content: center; height: 100%; color: var(--gold-light); font-size: 0.8rem; letter-spacing: 1px;">
+                      LOADING EXPERIENCE...
+                    </div>
+                  </div>
                 </div>
+
               </div>
             </div>
 

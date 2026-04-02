@@ -15,6 +15,26 @@ document.addEventListener('DOMContentLoaded', () => {
   initResponsiveUI();
 });
 
+// Global YouTube Handler for "Native" Feel
+function playYoutube(containerId, videoId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  
+  const poster = container.querySelector('.video-overlay');
+  const playerArea = container.querySelector('.yt-player-container');
+  
+  if (playerArea) {
+    playerArea.innerHTML = `
+      <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" 
+        allow="autoplay; fullscreen" 
+        allowfullscreen></iframe>
+    `;
+    container.classList.add('playing');
+    if (poster) poster.classList.add('hidden');
+  }
+}
+window.playYoutube = playYoutube;
+
 /* ========================================
    UNIFIED MEDIA EXPERIENCE (TOUR & ROOMS)
    ======================================== */
@@ -38,42 +58,14 @@ function initMediaExperience() {
     }
   });
 
+  // 2. Performance: Memory Management (Cleanup after closing)
   lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox || e.target.classList.contains('lightbox-close')) {
       lightbox.classList.remove('active');
       document.body.style.overflow = '';
-      setTimeout(() => { lightboxImg.src = ''; }, 400); // Clear memory
+      setTimeout(() => { lightboxImg.src = ''; }, 400); 
     }
   });
-
-  // 2. Video Fullscreen & Interaction
-  document.addEventListener('dblclick', (e) => {
-    const video = e.target.closest('video');
-    if (!video) return;
-
-    if (video.requestFullscreen) {
-      video.requestFullscreen();
-    } else if (video.webkitRequestFullscreen) {
-      video.webkitRequestFullscreen();
-    }
-  });
-
-  // 3. Performance: Global Video Observer (Only play what is visible)
-  const videoObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const video = entry.target;
-      if (entry.isIntersecting) {
-        video.setAttribute('preload', 'auto');
-        if (video.hasAttribute('data-autoplay') || video.classList.contains('tour-video')) {
-          video.play().catch(() => {});
-        }
-      } else {
-        video.pause();
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('video').forEach(v => videoObserver.observe(v));
 }
 
 /* ========================================
@@ -84,7 +76,6 @@ function initRoomExplorer() {
   if (!explorerContainer) return;
 
   const tabs = document.querySelectorAll('.explorer-tab');
-  const videoPlayer = document.getElementById('explorerVideo');
   const heroImage = document.getElementById('heroImage');
   const heroCounter = document.getElementById('heroCounter');
   const thumbStrip = document.getElementById('explorerThumbs');
@@ -104,7 +95,7 @@ function initRoomExplorer() {
       title: "Standard Room",
       category: "STANDARD",
       desc: "Our standard rooms offer elegant design and premium furniture at an affordable price. Experience the ILONGOSTAN standard of comfort with handcrafted dark wood furniture and premium bedding.",
-      video: "rooms explore/STANDARD/VIDEO EXPERIENCE FOR THE STANDARD ROOM/20260401_093154.mp4",
+      ytId: "kIR3uH8tgv4",
       images: [
         "rooms explore/STANDARD/ROOM PICS FOR STANDARD ROOMS/20260401_093044.jpg",
         "rooms explore/STANDARD/ROOM PICS FOR STANDARD ROOMS/20260401_093109.jpg",
@@ -121,7 +112,7 @@ function initRoomExplorer() {
       title: "Executive Suite",
       category: "EXECUTIVE",
       desc: "Superior furniture and spacious sizing for those who prioritize both business and relaxation. Designed for the modern professional with elegant views and premium finishes throughout.",
-      video: "rooms explore/DELUXE/EXECUTIVE/VIDEO EXPERIENCE FOR EXECUTIVE ROOM/20260401_092411.mp4",
+      ytId: "gWdzuTZ27a4",
       images: [
         "rooms explore/DELUXE/EXECUTIVE/ROOM PICS FOR EXECUTIVE ROOM/20260401_092037.jpg",
         "rooms explore/DELUXE/EXECUTIVE/ROOM PICS FOR EXECUTIVE ROOM/20260401_092042.jpg",
@@ -144,7 +135,7 @@ function initRoomExplorer() {
       title: "Royal King Suite",
       category: "ROYAL · KING",
       desc: "Our most grand suite, featuring elegant views and furniture that redefined royalty. Experience the ultimate Ilongostan luxury with spacious design and meticulous craftsmanship.",
-      video: "rooms explore/DELUXE/ROYAL/KING/VIDEO EXPERIENCE FOR THE KING ROOM/20260401_094206.mp4",
+      ytId: "zT-iayLN3OM",
       images: [
         "rooms explore/DELUXE/ROYAL/KING/ROOM PICS FOR THE KING ROOM/20260401_093636.jpg",
         "rooms explore/DELUXE/ROYAL/KING/ROOM PICS FOR THE KING ROOM/20260401_093648.jpg",
@@ -172,7 +163,7 @@ function initRoomExplorer() {
       title: "Royal Prince Room",
       category: "ROYAL · PRINCE",
       desc: "Discover elegant spacing and luxurious views. Every corner is crafted with sophisticated furniture and premium finishes. A room that embodies princely comfort and modern luxury.",
-      video: "rooms explore/DELUXE/ROYAL/PRINCE/VIDEO EXPERIENCE FOR THE PRINCE ROOM/20260401_091716.mp4",
+      ytId: "4LDvjx9NQ9k",
       images: [
         "rooms explore/DELUXE/ROYAL/PRINCE/PICTURES FOR THE PRINCE ROOM/20260401_091329.jpg",
         "rooms explore/DELUXE/ROYAL/PRINCE/PICTURES FOR THE PRINCE ROOM/20260401_091348.jpg",
@@ -197,7 +188,7 @@ function initRoomExplorer() {
       title: "Royal Queen Suite",
       category: "ROYAL · QUEEN",
       desc: "Elegant balcony views and a state-of-the-art bathroom design. Comfort meets a futuristic aesthetic for an unforgettable stay. The Queen Suite offers the perfect harmony of luxury and tranquility.",
-      video: "rooms explore/DELUXE/ROYAL/QUEEN/VIDEO EXPERIENCE FOR THE QUEEN ROOM/20260401_100613.mp4",
+      ytId: "nyjKFixFnhg",
       images: [
         "rooms explore/DELUXE/ROYAL/QUEEN/ROOM PICS FOR THE QUEEN ROOM/20260401_095940.jpg",
         "rooms explore/DELUXE/ROYAL/QUEEN/ROOM PICS FOR THE QUEEN ROOM/20260401_095943.jpg",
@@ -280,12 +271,21 @@ function initRoomExplorer() {
         <span>1 Video Tour</span>
       `;
       
-      // Handle Video — set poster to first image
-      if (data.video) {
-        const videoSource = videoPlayer.querySelector('source');
-        videoSource.src = data.video;
-        videoPlayer.poster = data.images[0] || '';
-        videoPlayer.load();
+      // Handle YouTube Video (Poster-First & Top-Crop)
+      const videoContainer = document.getElementById('explorerVideoContainer');
+      if (data.ytId && videoContainer) {
+        // Use first image as poster
+        const posterImg = data.images[0] || '';
+        
+        videoContainer.classList.remove('playing');
+        videoContainer.innerHTML = `
+          <div class="yt-responsive-wrap">
+            <div class="video-overlay" onclick="playYoutube('explorerVideoContainer', '${data.ytId}')" style="background-image: url('${posterImg}');">
+              <div class="play-icon-custom">▶</div>
+            </div>
+            <div class="yt-player-container"></div>
+          </div>
+        `;
       }
 
       // Set images & build thumbnails

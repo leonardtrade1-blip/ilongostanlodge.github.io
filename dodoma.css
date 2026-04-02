@@ -32,19 +32,6 @@
   100% { transform: scale(1.1); }
 }
 
-.dodoma-hero-video {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-.dodoma-hero-video video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.8;
-}
-
 .dodoma-hero-overlay {
   position: absolute;
   inset: 0;
@@ -117,14 +104,6 @@
   background: #000;
 }
 
-.tour-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  cursor: pointer;
-}
-
 .video-label {
   position: absolute;
   top: 20px;
@@ -150,13 +129,6 @@
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
-}
-
-.video-item video {
-  width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  display: block;
 }
 
 .video-info {
@@ -757,17 +729,6 @@
   background: rgba(212,168,83,0.05);
 }
 
-.video-wrapper {
-  aspect-ratio: 16 / 9;
-  background: #000;
-}
-
-.video-wrapper video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 /* Info Column */
 .explorer-info {
   background: linear-gradient(145deg, rgba(20,20,35,0.7), rgba(12,12,22,0.9));
@@ -940,3 +901,141 @@
   }
 }
 
+
+
+/* ========================================
+   YOUTUBE BRANDING MINIMIZATION (STEALTH CROP)
+   ======================================== */
+.yt-responsive-wrap {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  background: #000;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  border: 1px solid var(--glass-border);
+}
+
+/* The Stealth Crop Hack - Physically hides the YouTube Header/Channel info */
+.yt-responsive-wrap iframe {
+  position: absolute;
+  top: -75px; /* Offset to hide the YouTube Title/Channel Bar */
+  left: 0;
+  width: 100%;
+  height: calc(100% + 150px); /* Height increase to compensate for top/bottom crop */
+  border: 0;
+  opacity: 0;
+  transition: opacity 0.8s var(--ease-out-expo);
+  clip-path: inset(75px 0 75px 0); /* Extra layer of cropping security */
+  pointer-events: none;
+}
+
+/* Show video once loaded/played */
+.yt-responsive-wrap.playing iframe {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Custom Overlays for "Original" Look */
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50; /* Ensure this is on top of everything */
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.6s var(--ease-out-expo);
+}
+
+.video-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(7,7,12,0.2) 0%, rgba(7,7,12,0.6) 100%);
+  transition: opacity 0.3s ease;
+}
+
+.video-overlay:hover::before {
+  opacity: 0.8;
+}
+
+.play-icon-custom {
+  width: 80px;
+  height: 80px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 2.2rem;
+  box-shadow: 0 0 30px rgba(212, 168, 83, 0.4);
+  transform: scale(1);
+  transition: all 0.4s var(--ease-out-expo);
+  z-index: 51;
+}
+
+.video-overlay:hover .play-icon-custom {
+  transform: scale(1.1);
+  box-shadow: 0 0 50px rgba(212, 168, 83, 0.7);
+}
+
+.video-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.05);
+}
+
+/* Room Explorer Specific Tweaks - TALL & UNIFIED */
+.video-wrapper.yt-mode {
+  position: relative;
+  overflow: hidden; /* CRITICAL: Clips the hidden header */
+  background: #10101a;
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 320px; /* Modern Smartphone Vertical Width */
+  margin: 0 auto;   /* Perfect Center Alignment */
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 15px 45px rgba(0,0,0,0.6);
+  z-index: 10;
+}
+
+/* Force the child wrapper to be VERTICAL (9:16) in Room Explorer */
+.video-wrapper.yt-mode .yt-responsive-wrap {
+  padding-bottom: 177.77%; /* 9:16 Aspect Ratio */
+  border: none;
+  box-shadow: none;
+  overflow: visible; /* Let the crop happen through the iframe position */
+}
+
+/* UNIVERSAL STEALTH CROP HACK - Applied to ALL YouTube iFrames */
+.yt-responsive-wrap iframe {
+  position: absolute;
+  top: -75px; /* Default for Horizontal */
+  left: 0;
+  width: 100% !important;
+  height: calc(100% + 150px) !important;
+  border: 0;
+  opacity: 0;
+  transition: opacity 0.8s var(--ease-out-expo);
+  clip-path: inset(75px 0 75px 0); 
+  pointer-events: none;
+}
+
+/* More Aggressive Crop for Vertical Shorts in Room Explorer */
+.video-wrapper.yt-mode .yt-responsive-wrap iframe {
+  top: -100px; /* Massive crop to hide mobile-style YouTube header */
+  height: calc(100% + 200px) !important;
+  clip-path: inset(100px 0 100px 0);
+}
+
+/* Universal Reveal Logic: Works if 'playing' is on the wrapper OR the parent */
+.yt-responsive-wrap.playing iframe,
+.video-wrapper.yt-mode.playing iframe {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}

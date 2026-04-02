@@ -17,3 +17,9 @@ node_modules/
 *.MOV
 *.avi
 *.webm
+
+# Utilities
+video_list.txt
+_tools/
+package-lock.json
+package.json
