@@ -12,3 +12,8 @@ desktop.ini
 
 # Node
 node_modules/
+
+*.mp4
+*.MOV
+*.avi
+*.webm
